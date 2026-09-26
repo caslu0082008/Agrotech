@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>(function(){try{if(localStorage.getItem("agrotech-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Jogo — Campo em Guerra — AgroTech</title>
+<meta name="description" content="Campo em Guerra — FPS agrícola do projeto AgroTech, desenvolvido com GDevelop.">
+<meta name="theme-color" content="#145c26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23145c26'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' transform='translate(4 4) scale(1)'%3E%3Cpath d='M7 20h10'/%3E%3Cpath d='M10 20c5.5-2.5.8-6.4 3-10'/%3E%3Cpath d='M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z'/%3E%3Cpath d='M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/efeitos.css">
+<link rel="stylesheet" href="css/jogo.css">
+</head>
+<body class="page-jogo">
+
+<!-- ══════ NAV ══════ -->
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="logo-mark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></span>
+    AgroTech
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" id="nl-home">Home</a></li>
+    <li><a href="equipe.html" id="nl-team">Equipe</a></li>
+    <li><a href="produtos.html" id="nl-mat">Materiais</a></li>
+    <li><a href="referencias.html" id="nl-refs">Referências</a></li>
+    <li><a href="jogo.html" id="nl-game" class="active">O Jogo</a></li>
+    <li><a href="contato.html" id="nl-contato">Contato</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+    <a class="nav-cta nav-agrotruck" id="navAgrotruckBtn" href="agrotruck.html" hidden>Meu Agrotruck</a>
+    <button class="nav-cta" id="navAuthBtn" onclick="AgroAuth.onNavAuthClick()">Entrar</button>
+    <div class="nav-user" id="navUser" hidden>
+      <a href="admin.html" data-admin-link hidden>Administrar</a>
+      <span class="nav-user-name" id="navUserName"></span>
+      <button class="nav-user-logout" id="navLogoutBtn" onclick="AgroAuth.logout()">Sair</button>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="equipe.html">Equipe</a>
+  <a href="produtos.html">Materiais</a>
+  <a href="referencias.html">Referências</a>
+  <a href="jogo.html" class="active" aria-current="page">O Jogo</a>
+  <a href="contato.html">Contato</a>
+  <div class="mobile-menu-footer">
+    <a class="nav-cta nav-agrotruck" id="navAgrotruckBtnMobile" href="agrotruck.html" style="flex:1;text-align:center;" hidden>Meu Agrotruck</a>
+    <button class="nav-cta" style="flex:1;" id="navAuthBtnMobile" onclick="closeMenu();AgroAuth.onNavAuthClick()">Entrar</button>
+    <div class="nav-user nav-user-mobile" id="navUserMobile" style="flex:1;" hidden>
+      <a href="admin.html" data-admin-link hidden>Administrar</a>
+      <span class="nav-user-name" id="navUserNameMobile"></span>
+      <button class="nav-user-logout" id="navLogoutBtnMobile" onclick="closeMenu();AgroAuth.logout()">Sair</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ AUTH MODAL (login / cadastro / recuperação de senha) ══════ -->
+<div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <button class="login-close" onclick="closeLogin()" aria-label="Fechar"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+
+    <!-- ── VIEW: LOGIN ── -->
+    <div class="auth-view" id="view-login" data-view="login">
+      <div class="login-badge"><span class="badge-dot"></span>Acesso à plataforma</div>
+      <div class="login-title" id="loginTitle">Entrar</div>
+      <p class="login-sub">Acesse o painel AgroTech para acompanhar seus sensores e relatórios.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" name="password" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <div class="login-row">
+          <label class="login-check">
+            <input type="checkbox" name="remember" id="loginRemember"> Lembrar de mim
+          </label>
+          <a href="#" class="login-forgot" onclick="return AgroAuth.showView('forgot');">Esqueceu a senha?</a>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Entrar</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="loginError"></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Ainda não tem conta? <a href="#" onclick="return AgroAuth.showView('register');">Criar conta</a></p>
+    </div>
+
+    <!-- ── VIEW: CADASTRO ── -->
+    <div class="auth-view" id="view-register" data-view="register" hidden>
+      <div class="login-badge"><span class="badge-dot"></span>Nova conta</div>
+      <div class="login-title">Criar conta</div>
+      <p class="login-sub">Cadastre-se para acessar o painel AgroTech.</p>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="registerNome">Nome</label>
+          <input type="text" id="registerNome" name="nome" placeholder="Seu nome completo" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="registerEmail">E-mail</label>
+          <input type="email" id="registerEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" name="password" placeholder="Mínimo 8 caracteres, com letras e números" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Criar conta</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="registerError"></div>
+        <div class="form-success" id="registerSuccess"><span class="ico">✓</span><span class="form-success-text">Conta criada com sucesso!</span></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Já tem conta? <a href="#" onclick="return AgroAuth.showView('login');">Entrar</a></p>
+    </div>
+
+    <!-- ── VIEW: ESQUECI MINHA SENHA ── -->
+    <div class="auth-view" id="view-forgot" data-view="forgot" hidden>
+      <div class="login-badge"><span class="badge-dot"></span>Recuperação de senha</div>
+      <div class="login-title">Esqueceu a senha?</div>
+      <p class="login-sub">Informe seu e-mail. Se houver uma conta cadastrada, enviaremos um link para redefinir sua senha.</p>
+
+      <form id="forgotForm" novalidate>
+        <div class="field">
+          <label for="forgotEmail">E-mail</label>
+          <input type="email" id="forgotEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Enviar link de recuperação</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="forgotError"></div>
+        <div class="form-success" id="forgotSuccess"><span class="ico">✓</span><span class="form-success-text">Se este e-mail estiver cadastrado, você receberá um link em instantes.</span></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Lembrou a senha? <a href="#" onclick="return AgroAuth.showView('login');">Entrar</a></p>
+    </div>
+
+  </div>
+</div>
+<div class="page active" id="page-game">
+
+  <div class="game-main">
+    <div class="game-hero">
+            <div class="game-content">
+        <div class="game-badge"><span class="badge-dot"></span>Jogo disponível em breve</div>
+        <div class="game-h1">Campo em<br><span class="hl">Guerra</span></div>
+        <p class="game-sub">Um FPS agrícola onde você pilota um caminhão de combate, varre hectares em busca de plantas invasoras e as elimina antes que destruam a colheita.</p>
+        <div class="game-tags">
+          <span class="g-tag">FPS</span><span class="g-tag">Ação</span>
+          <span class="g-tag">Veículo</span><span class="g-tag">GDevelop</span><span class="g-tag">Agro</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scanner-strip">
+      <span class="strip-label">Ficha técnica</span>
+      <div class="strip-div"></div><span class="strip-item">Gênero · FPS</span>
+      <div class="strip-div"></div><span class="strip-item">Engine · GDevelop</span>
+      <div class="strip-div"></div><span class="strip-item">Plataforma · Navegador</span>
+      <div class="strip-div"></div><span class="strip-item">Acesso · Gratuito</span>
+    </div>
+
+    <div class="game-story">
+      <div>
+        <div class="eyebrow">A história</div>
+        <div class="sec-title">A lavoura está sob ataque.</div>
+        <p class="story-p">Uma espécie agressiva de planta invasora começou a se espalhar pelas plantações da fazenda. Rápida, resistente e difícil de detectar, ela sufoca as culturas e ameaça toda a produção da safra.</p>
+        <p class="story-p">Você é o piloto do <strong style="color:var(--green5)">AgroBot</strong> — um caminhão de combate equipado com sensores de detecção e armamento de precisão. Sua missão: varrer cada setor e eliminar as ameaças.</p>
+        <div class="mech-list">
+          <div class="mech-item"><span class="mech-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span><div><div class="mech-title">Pilote o AgroBot</div><div class="mech-desc">Controle um caminhão de combate em visão FPS pelas lavouras</div></div></div>
+          <div class="mech-item"><span class="mech-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg></span><div><div class="mech-title">Detecte os invasores</div><div class="mech-desc">Identifique plantas inimigas escondidas entre as culturas saudáveis</div></div></div>
+          <div class="mech-item"><span class="mech-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/></svg></span><div><div class="mech-title">Proteja a colheita</div><div class="mech-desc">Elimine com precisão sem danificar as plantações saudáveis</div></div></div>
+        </div>
+      </div>
+      <div>
+        <p class="video-label">Demo · máx. 40 segundos</p>
+        <div class="video-wrap" onclick="startVideo(this)">
+                    <div class="play-btn" role="button" aria-label="Reproduzir demo"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7 4 19 12 7 20" fill="currentColor" stroke="none"/></svg></div>
+          <div class="video-caption">Campo em Guerra — gameplay demo</div>
+          <div class="video-timer">0:00 / 0:40</div>
+          <div class="video-progress"><div class="vp-fill"></div></div>
+        </div>
+        <p class="video-note">Placeholder — substitua pelo embed do YouTube ou Vimeo quando o vídeo estiver pronto.</p>
+      </div>
+    </div>
+
+    <div class="game-specs p-main">
+      <div class="eyebrow">Detalhes do jogo</div>
+      <div class="specs-grid" style="margin-bottom:0;">
+        <div class="spec-card"><div class="spec-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><rect x="2" y="6" width="20" height="12" rx="4"/></svg></div><div class="spec-val">FPS</div><div class="spec-label">Gênero</div></div>
+        <div class="spec-card"><div class="spec-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><div class="spec-val">Navegador</div><div class="spec-label">Plataforma</div></div>
+        <div class="spec-card"><div class="spec-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="spec-val">GDevelop</div><div class="spec-label">Engine</div></div>
+        <div class="spec-card"><div class="spec-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.42l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".8" fill="currentColor" stroke="none"/></svg></div><div class="spec-val">Gratuito</div><div class="spec-label">Acesso</div></div>
+      </div>
+    </div>
+
+    <div class="game-cta-section">
+      <div class="cta-content">
+        <div class="cta-h">Pronto para defender a lavoura?</div>
+        <p class="cta-sub">Entre no AgroBot e elimine cada planta invasora antes que a colheita seja perdida.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#" class="play-now">Jogar agora <svg class="ico ico-inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <span class="cta-note">Abre no GDevelop · gratuito</span>
+      </div>
+    </div>
+  </div>
+
+  <footer style="margin-top:48px;"><span class="footer-logo">AgroTech</span><span class="footer-text">Campo em Guerra · Desenvolvido com GDevelop</span></footer>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script src="js/chuva.js"></script>
+<script src="js/efeitos.js"></script>
+<script src="js/jogo.js"></script>
+</body>
+</html>

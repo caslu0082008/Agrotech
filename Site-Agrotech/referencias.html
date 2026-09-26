@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>(function(){try{if(localStorage.getItem("agrotech-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referências — AgroTech</title>
+<meta name="description" content="Artigos, sites, ferramentas e vídeos que embasaram o desenvolvimento do AgroTech.">
+<meta name="theme-color" content="#145c26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23145c26'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' transform='translate(4 4) scale(1)'%3E%3Cpath d='M7 20h10'/%3E%3Cpath d='M10 20c5.5-2.5.8-6.4 3-10'/%3E%3Cpath d='M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z'/%3E%3Cpath d='M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/efeitos.css">
+<link rel="stylesheet" href="css/referencias.css">
+</head>
+<body>
+
+<!-- ══════ NAV ══════ -->
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="logo-mark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></span>
+    AgroTech
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" id="nl-home">Home</a></li>
+    <li><a href="equipe.html" id="nl-team">Equipe</a></li>
+    <li><a href="produtos.html" id="nl-mat">Materiais</a></li>
+    <li><a href="referencias.html" id="nl-refs" class="active">Referências</a></li>
+    <li><a href="jogo.html" id="nl-game">O Jogo</a></li>
+    <li><a href="contato.html" id="nl-contato">Contato</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+    <a class="nav-cta nav-agrotruck" id="navAgrotruckBtn" href="agrotruck.html" hidden>Meu Agrotruck</a>
+    <button class="nav-cta" id="navAuthBtn" onclick="AgroAuth.onNavAuthClick()">Entrar</button>
+    <div class="nav-user" id="navUser" hidden>
+      <a href="admin.html" data-admin-link hidden>Administrar</a>
+      <span class="nav-user-name" id="navUserName"></span>
+      <button class="nav-user-logout" id="navLogoutBtn" onclick="AgroAuth.logout()">Sair</button>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="equipe.html">Equipe</a>
+  <a href="produtos.html">Materiais</a>
+  <a href="referencias.html" class="active" aria-current="page">Referências</a>
+  <a href="jogo.html">O Jogo</a>
+  <a href="contato.html">Contato</a>
+  <div class="mobile-menu-footer">
+    <a class="nav-cta nav-agrotruck" id="navAgrotruckBtnMobile" href="agrotruck.html" style="flex:1;text-align:center;" hidden>Meu Agrotruck</a>
+    <button class="nav-cta" style="flex:1;" id="navAuthBtnMobile" onclick="closeMenu();AgroAuth.onNavAuthClick()">Entrar</button>
+    <div class="nav-user nav-user-mobile" id="navUserMobile" style="flex:1;" hidden>
+      <a href="admin.html" data-admin-link hidden>Administrar</a>
+      <span class="nav-user-name" id="navUserNameMobile"></span>
+      <button class="nav-user-logout" id="navLogoutBtnMobile" onclick="closeMenu();AgroAuth.logout()">Sair</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ AUTH MODAL (login / cadastro / recuperação de senha) ══════ -->
+<div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <button class="login-close" onclick="closeLogin()" aria-label="Fechar"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+
+    <!-- ── VIEW: LOGIN ── -->
+    <div class="auth-view" id="view-login" data-view="login">
+      <div class="login-badge"><span class="badge-dot"></span>Acesso à plataforma</div>
+      <div class="login-title" id="loginTitle">Entrar</div>
+      <p class="login-sub">Acesse o painel AgroTech para acompanhar seus sensores e relatórios.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" name="password" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <div class="login-row">
+          <label class="login-check">
+            <input type="checkbox" name="remember" id="loginRemember"> Lembrar de mim
+          </label>
+          <a href="#" class="login-forgot" onclick="return AgroAuth.showView('forgot');">Esqueceu a senha?</a>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Entrar</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="loginError"></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Ainda não tem conta? <a href="#" onclick="return AgroAuth.showView('register');">Criar conta</a></p>
+    </div>
+
+    <!-- ── VIEW: CADASTRO ── -->
+    <div class="auth-view" id="view-register" data-view="register" hidden>
+      <div class="login-badge"><span class="badge-dot"></span>Nova conta</div>
+      <div class="login-title">Criar conta</div>
+      <p class="login-sub">Cadastre-se para acessar o painel AgroTech.</p>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="registerNome">Nome</label>
+          <input type="text" id="registerNome" name="nome" placeholder="Seu nome completo" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="registerEmail">E-mail</label>
+          <input type="email" id="registerEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" name="password" placeholder="Mínimo 8 caracteres, com letras e números" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Criar conta</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="registerError"></div>
+        <div class="form-success" id="registerSuccess"><span class="ico">✓</span><span class="form-success-text">Conta criada com sucesso!</span></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Já tem conta? <a href="#" onclick="return AgroAuth.showView('login');">Entrar</a></p>
+    </div>
+
+    <!-- ── VIEW: ESQUECI MINHA SENHA ── -->
+    <div class="auth-view" id="view-forgot" data-view="forgot" hidden>
+      <div class="login-badge"><span class="badge-dot"></span>Recuperação de senha</div>
+      <div class="login-title">Esqueceu a senha?</div>
+      <p class="login-sub">Informe seu e-mail. Se houver uma conta cadastrada, enviaremos um link para redefinir sua senha.</p>
+
+      <form id="forgotForm" novalidate>
+        <div class="field">
+          <label for="forgotEmail">E-mail</label>
+          <input type="email" id="forgotEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Enviar link de recuperação</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="forgotError"></div>
+        <div class="form-success" id="forgotSuccess"><span class="ico">✓</span><span class="form-success-text">Se este e-mail estiver cadastrado, você receberá um link em instantes.</span></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Lembrou a senha? <a href="#" onclick="return AgroAuth.showView('login');">Entrar</a></p>
+    </div>
+
+  </div>
+</div>
+<div class="page active" id="page-refs">
+
+  <section class="hero">
+    <video class="hero-video hero-video-dark" autoplay muted loop playsinline poster="img/imagem_home.png">
+      <source src="img/hero-video.mp4" type="video/mp4">
+    </video>
+    <video class="hero-video hero-video-light" muted loop playsinline poster="img/hero-video-light-poster.jpg">
+      <source src="img/hero-video-light.mp4" type="video/mp4">
+    </video>
+    <div class="hero-grid"></div><div class="hero-glow"></div>
+    <div class="hero-right-panel"><div class="panel-veil"></div></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>Base científica do projeto</div>
+      <h1>Referências<br>&amp; <span class="hl">Fontes</span></h1>
+      <p class="hero-sub">Artigos, ferramentas, sites e vídeos que embasaram o desenvolvimento do AgroTech.</p>
+    </div>
+  </section>
+
+  <div class="scanner-strip">
+    <span class="strip-label">Fontes catalogadas</span>
+    <div class="strip-div"></div><span class="strip-item">Artigos · 4</span>
+    <div class="strip-div"></div><span class="strip-item">Sites · 4</span>
+    <div class="strip-div"></div><span class="strip-item">Ferramentas · 4</span>
+    <div class="strip-div"></div><span class="strip-item">Vídeos · 3</span>
+  </div>
+
+  <div class="ref-main">
+
+    <div class="filter-bar">
+      <span class="filter-label">Filtrar:</span>
+      <button class="filter-btn on" onclick="filterRefs('all',this)">Todos <span class="filter-count">15</span></button>
+      <button class="filter-btn" onclick="filterRefs('art',this)">Artigos <span class="filter-count">4</span></button>
+      <button class="filter-btn" onclick="filterRefs('site',this)">Sites <span class="filter-count">4</span></button>
+      <button class="filter-btn" onclick="filterRefs('tool',this)">Ferramentas <span class="filter-count">4</span></button>
+      <button class="filter-btn" onclick="filterRefs('vid',this)">Vídeos <span class="filter-count">3</span></button>
+    </div>
+
+    <!-- artigos -->
+    <div class="ref-section" data-cat="art">
+      <div class="ref-section-head">
+        <div class="rsh-icon rsh-g"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></div>
+        <div class="rsh-text"><div class="eyebrow">Pesquisa acadêmica</div><div class="sec-title" style="font-size:28px;margin-bottom:0;">Artigos Científicos</div></div>
+      </div>
+      <div class="ref-grid">
+        <a class="ref-card principal" href="#" target="_blank">
+          <div class="principal-tag"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2.5 2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.3l6.5-.9z"/></svg> Referência principal</div>
+          <div class="ref-top"><span class="ref-badge rb-art">Artigo</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div>
+          <div class="ref-title">Desenvolvimento de um Carrinho Automatizado para Monitoramento e Identificação de Problemas no Solo em Plantações de Soja</div>
+          <div class="ref-authors">Autores a definir · Instituição a definir</div>
+          <div class="ref-desc">Artigo que fundamenta diretamente o projeto AgroTech, apresentando o desenvolvimento de um veículo automatizado para monitoramento de lavouras de soja.</div>
+          <div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg> 2024</span><div class="rmd"></div><span class="ref-meta-item">Agricultura de Precisão</span><div class="rmd"></div><span class="ref-meta-item">IoT Agrícola</span></div>
+        </a>
+        <a class="ref-card" href="#" target="_blank">
+          <div class="ref-top"><span class="ref-badge rb-art">Artigo</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div>
+          <div class="ref-title">Aplicação de Sensores IoT para Monitoramento de Umidade e Temperatura em Culturas Agrícolas</div>
+          <div class="ref-authors">Placeholder · Revista Brasileira de Engenharia Agrícola, 2023</div>
+          <div class="ref-desc">Estudo sobre redes de sensores distribuídos em lavouras para coleta de dados ambientais em tempo real.</div>
+          <div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg> 2023</span><div class="rmd"></div><span class="ref-meta-item">Sensoriamento</span></div>
+        </a>
+        <a class="ref-card" href="#" target="_blank">
+          <div class="ref-top"><span class="ref-badge rb-art">Artigo</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div>
+          <div class="ref-title">Detecção de Plantas Daninhas Utilizando Visão Computacional e Machine Learning</div>
+          <div class="ref-authors">Placeholder · Embrapa Informática Agropecuária, 2023</div>
+          <div class="ref-desc">Pesquisa sobre algoritmos de visão computacional para identificação automática de plantas invasoras.</div>
+          <div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg> 2023</span><div class="rmd"></div><span class="ref-meta-item">Visão Computacional</span></div>
+        </a>
+        <a class="ref-card" href="#" target="_blank">
+          <div class="ref-top"><span class="ref-badge rb-art">Artigo</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div>
+          <div class="ref-title">Robótica Agrícola: Panorama e Perspectivas para a Agricultura 4.0 no Brasil</div>
+          <div class="ref-authors">Placeholder · Congresso Brasileiro de Engenharia Agrícola, 2022</div>
+          <div class="ref-desc">Revisão do estado da arte em robótica para o agronegócio, contextualiza o projeto no movimento global de automação.</div>
+          <div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg> 2022</span><div class="rmd"></div><span class="ref-meta-item">Robótica</span></div>
+        </a>
+      </div>
+    </div>
+
+    <div class="ref-section-div ref-div-el"></div>
+
+    <!-- sites -->
+    <div class="ref-section" data-cat="site">
+      <div class="ref-section-head">
+        <div class="rsh-icon rsh-b"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
+        <div class="rsh-text"><div class="eyebrow">Documentação & portais</div><div class="sec-title" style="font-size:28px;margin-bottom:0;">Sites & Referências Online</div></div>
+      </div>
+      <div class="ref-grid">
+        <a class="ref-card blue" href="https://embrapa.br" target="_blank"><div class="ref-top"><span class="ref-badge rb-site">Site</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Embrapa — Empresa Brasileira de Pesquisa Agropecuária</div><div class="ref-desc">Portal da Embrapa com pesquisas, publicações e tecnologias para o agronegócio brasileiro.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> embrapa.br</span></div></a>
+        <a class="ref-card blue" href="https://gdevelop.io" target="_blank"><div class="ref-top"><span class="ref-badge rb-site">Site</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">GDevelop — Documentação Oficial</div><div class="ref-desc">Documentação da engine GDevelop usada no jogo Campo em Guerra.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> gdevelop.io</span></div></a>
+        <a class="ref-card blue" href="https://arduino.cc" target="_blank"><div class="ref-top"><span class="ref-badge rb-site">Site</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Arduino — Documentação e Referência de Hardware</div><div class="ref-desc">Referência técnica para microcontroladores usados nos sensores do AgroBot.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> arduino.cc</span></div></a>
+        <a class="ref-card blue" href="#" target="_blank"><div class="ref-top"><span class="ref-badge rb-site">Site</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">MAPA — Ministério da Agricultura, Pecuária e Abastecimento</div><div class="ref-desc">Dados oficiais sobre produção agrícola e programas de tecnologia no campo.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> gov.br/agricultura</span></div></a>
+      </div>
+    </div>
+
+    <div class="ref-section-div ref-div-el"></div>
+
+    <!-- ferramentas -->
+    <div class="ref-section" data-cat="tool">
+      <div class="ref-section-head">
+        <div class="rsh-icon rsh-a"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div class="rsh-text"><div class="eyebrow">Tecnologias utilizadas</div><div class="sec-title" style="font-size:28px;margin-bottom:0;">Ferramentas & Tecnologias</div></div>
+      </div>
+      <div class="ref-grid">
+        <a class="ref-card amber" href="https://mosquitto.org" target="_blank"><div class="ref-top"><span class="ref-badge rb-tool">Ferramenta</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Eclipse Mosquitto — MQTT Broker</div><div class="ref-desc">Broker MQTT para comunicação entre sensores IoT e servidor central.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> Protocolo MQTT</span></div></a>
+        <a class="ref-card amber" href="https://grafana.com" target="_blank"><div class="ref-top"><span class="ref-badge rb-tool">Ferramenta</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Grafana — Visualização de Dados</div><div class="ref-desc">Dashboards usados para visualização dos dados dos sensores em tempo real.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg> Dashboards</span></div></a>
+        <a class="ref-card amber" href="https://node-red.org" target="_blank"><div class="ref-top"><span class="ref-badge rb-tool">Ferramenta</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Node-RED — Automação IoT</div><div class="ref-desc">Plataforma visual para orquestração do fluxo de dados entre sensores e painel.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg> Automação</span></div></a>
+        <a class="ref-card amber" href="https://tinkercad.com" target="_blank"><div class="ref-top"><span class="ref-badge rb-tool">Ferramenta</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Tinkercad — Simulação de Circuitos</div><div class="ref-desc">Simulador para prototipagem dos circuitos eletrônicos do AgroBot.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg> Prototipagem</span></div></a>
+      </div>
+    </div>
+
+    <div class="ref-section-div ref-div-el"></div>
+
+    <!-- vídeos -->
+    <div class="ref-section" data-cat="vid">
+      <div class="ref-section-head">
+        <div class="rsh-icon rsh-t"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.22 3.48a.5.5 0 0 0 .78-.42V7.87a.5.5 0 0 0-.75-.43L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div>
+        <div class="rsh-text"><div class="eyebrow">Conteúdo audiovisual</div><div class="sec-title" style="font-size:28px;margin-bottom:0;">Vídeos de Referência</div></div>
+      </div>
+      <div class="ref-grid">
+        <a class="ref-card teal" href="#" target="_blank"><div class="ref-top"><span class="ref-badge rb-vid">Vídeo</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Agricultura de Precisão com IoT: Do Sensor à Decisão</div><div class="ref-desc">Série sobre uso de sensores e conectividade no campo — Canal Embrapa Digital.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7 4 19 12 7 20" fill="currentColor" stroke="none"/></svg> YouTube</span><div class="rmd"></div><span class="ref-meta-item">~45 min</span></div></a>
+        <a class="ref-card teal" href="#" target="_blank"><div class="ref-top"><span class="ref-badge rb-vid">Vídeo</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Criando seu Primeiro Jogo no GDevelop — Curso Completo</div><div class="ref-desc">Tutorial em português sobre criação de jogos, base para o Campo em Guerra.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7 4 19 12 7 20" fill="currentColor" stroke="none"/></svg> YouTube</span><div class="rmd"></div><span class="ref-meta-item">~2h</span></div></a>
+        <a class="ref-card teal" href="#" target="_blank"><div class="ref-top"><span class="ref-badge rb-vid">Vídeo</span><span class="ref-arrow"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div><div class="ref-title">Robôs na Agricultura: Automação no Agronegócio Brasileiro</div><div class="ref-desc">Documentário sobre robótica agrícola com cases reais de fazendas automatizadas.</div><div class="ref-meta"><span class="ref-meta-item"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="7 4 19 12 7 20" fill="currentColor" stroke="none"/></svg> YouTube</span><div class="rmd"></div><span class="ref-meta-item">~30 min</span></div></a>
+      </div>
+    </div>
+
+    <div class="page-end" style="margin-top:52px;">
+      <div><div class="pe-h">Quer adicionar uma referência?</div><div class="pe-sub">Entre em contato com a equipe.</div></div>
+      <div class="pe-note">Links serão atualizados conforme o projeto avança.</div>
+    </div>
+  </div>
+
+  <footer><span class="footer-logo">AgroTech</span><span class="footer-text">Referências & Fontes · Base científica</span></footer>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script src="js/chuva.js"></script>
+<script src="js/efeitos.js"></script>
+<script src="js/referencias.js"></script>
+</body>
+</html>

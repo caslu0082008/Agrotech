@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>(function(){try{if(localStorage.getItem("agrotech-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redefinir senha — AgroTech</title>
+<meta name="description" content="Redefina a senha da sua conta AgroTech.">
+<meta name="theme-color" content="#145c26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23145c26'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' transform='translate(4 4) scale(1)'%3E%3Cpath d='M7 20h10'/%3E%3Cpath d='M10 20c5.5-2.5.8-6.4 3-10'/%3E%3Cpath d='M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z'/%3E%3Cpath d='M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/efeitos.css">
+<style>
+  .reset-wrap {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  .reset-card {
+    width: 100%; max-width: 400px; background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--r-lg); padding: 34px 30px 30px; box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  }
+  [data-theme="light"] .reset-card { box-shadow: 0 20px 50px rgba(15,45,20,.14); }
+  .reset-title {
+    font-family: 'Bebas Neue', 'Oswald', 'Haettenschweiler', 'Arial Narrow', sans-serif;
+    font-size: 34px; letter-spacing: .02em; color: var(--text1); margin-bottom: 6px;
+  }
+  .reset-sub { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 24px; }
+  .reset-back { display: block; margin-top: 18px; text-align: center; font-size: 14px; color: var(--green4); text-decoration: none; }
+  [data-theme="light"] .reset-back { color: var(--accent); }
+  .reset-back:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="reset-wrap">
+  <div class="reset-card">
+    <div class="reset-title">Nova senha</div>
+    <p class="reset-sub" id="resetSub">Crie uma nova senha para acessar sua conta AgroTech.</p>
+
+    <form id="resetForm" novalidate>
+      <div class="field">
+        <label for="resetPassword">Nova senha</label>
+        <input type="password" id="resetPassword" name="password" placeholder="Mínimo 8 caracteres, com letras e números" autocomplete="new-password" required>
+      </div>
+      <div class="field">
+        <label for="resetPasswordConfirm">Confirmar nova senha</label>
+        <input type="password" id="resetPasswordConfirm" name="passwordConfirm" placeholder="Repita a nova senha" autocomplete="new-password" required>
+      </div>
+      <button type="submit" class="submit-btn">
+        <span class="btn-label">Redefinir senha</span>
+        <span class="btn-spinner" aria-hidden="true"></span>
+      </button>
+      <div class="login-error" id="resetError"></div>
+      <div class="form-success" id="resetSuccess"><span class="ico">✓</span><span class="form-success-text">Senha redefinida com sucesso!</span></div>
+    </form>
+
+    <a href="index.html" class="reset-back">Voltar para o site</a>
+  </div>
+</div>
+
+<script src="js/auth.js"></script>
+<script>
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+  const form = document.getElementById('resetForm');
+  const errorEl = document.getElementById('resetError');
+  const successEl = document.getElementById('resetSuccess');
+  const subEl = document.getElementById('resetSub');
+  let submitting = false;
+
+  if (!token) {
+    subEl.textContent = 'Link de recuperação inválido: token não encontrado na URL.';
+    form.style.display = 'none';
+    return;
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (submitting) return;
+
+    errorEl.textContent = '';
+    errorEl.classList.remove('show');
+    successEl.style.display = 'none';
+
+    const password = document.getElementById('resetPassword').value;
+    const passwordConfirm = document.getElementById('resetPasswordConfirm').value;
+
+    if (password.length < 8 || !/[A-Za-z]/.test(password) || !/\d/.test(password)) {
+      errorEl.textContent = 'A senha deve ter pelo menos 8 caracteres, com letras e números.';
+      errorEl.classList.add('show');
+      return;
+    }
+    if (password !== passwordConfirm) {
+      errorEl.textContent = 'As senhas não coincidem.';
+      errorEl.classList.add('show');
+      return;
+    }
+
+    const btn = form.querySelector('.submit-btn');
+    submitting = true;
+    btn.disabled = true;
+    btn.classList.add('is-loading');
+
+    try {
+      await window.AgroAuth.apiRequest('/reset-password', { method: 'POST', body: { token, password } });
+      successEl.style.display = 'flex';
+      form.style.display = 'none';
+    } catch (err) {
+      errorEl.textContent = err.message || 'Não foi possível redefinir a senha. Tente novamente.';
+      errorEl.classList.add('show');
+    } finally {
+      submitting = false;
+      btn.disabled = false;
+      btn.classList.remove('is-loading');
+    }
+  });
+})();
+</script>
+</body>
+</html>

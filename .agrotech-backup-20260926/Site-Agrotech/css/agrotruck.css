@@ -1,0 +1,155 @@
+/* ═══════════════════════════════════════════
+   AGROTRUCK — página exclusiva do usuário logado
+═══════════════════════════════════════════ */
+
+/* ── tela de verificação (antes de saber se está autenticado) ── */
+.agro-gate {
+  min-height: 60vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  color: var(--text2); font-size: 14px;
+}
+.agro-gate-spinner {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 2px solid var(--border); border-top-color: var(--green4);
+  animation: agro-spin .8s linear infinite;
+}
+@keyframes agro-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .agro-gate-spinner { animation: none; }
+}
+
+/* ── hero ── */
+.agro-hero {
+  border-bottom: 1px solid var(--border2);
+  padding: 48px var(--gutter) 36px;
+  background: var(--bg2);
+}
+.agro-hero-inner { max-width: 720px; }
+.agro-hero h1 {
+  font-family: 'Bebas Neue','Oswald',sans-serif;
+  font-size: clamp(30px, 4vw, 42px); font-weight: 400;
+  line-height: 1.15; letter-spacing: .01em; color: var(--text1);
+  margin: 4px 0 10px;
+}
+.agro-hero h1 .hl { color: var(--green4); }
+[data-theme="light"] .agro-hero h1 .hl { color: var(--green2); }
+.agro-hero-sub { font-size: 15px; color: var(--text2); line-height: 1.7; max-width: 560px; }
+
+/* ── faixa de status ── */
+.agro-status-strip {
+  display: flex; flex-wrap: wrap; gap: 10px 28px;
+  padding: 16px var(--gutter);
+  border-bottom: 1px solid var(--border2);
+  background: var(--card-bg);
+}
+.agro-status-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); }
+.agro-status-item b { color: var(--text1); font-weight: 600; }
+.agro-status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.agro-status-dot.ok { background: var(--green4); }
+.agro-status-dot.pending { background: var(--text3); }
+.agro-status-dot.bad { background: #d64545; }
+
+/* ── tutorial ── */
+.agro-tutorial { padding: 48px var(--gutter) 0; max-width: 760px; }
+.agro-tutorial-note {
+  font-size: 14px; color: var(--text2); line-height: 1.7;
+  margin: -10px 0 28px; padding: 12px 16px;
+  background: var(--bg2); border: 1px solid var(--border2); border-radius: var(--r-md);
+}
+.agro-tutorial-note em { color: var(--text1); font-style: normal; font-weight: 600; }
+
+.agro-steps { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.agro-step {
+  display: flex; gap: 18px; padding: 22px 0;
+  border-top: 1px solid var(--border2);
+}
+.agro-step:first-child { border-top: none; padding-top: 0; }
+.agro-step-num {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--card-bg); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px; font-weight: 600; color: var(--green4);
+}
+[data-theme="light"] .agro-step-num { color: var(--green2); }
+.agro-step-body { flex: 1; min-width: 0; }
+.agro-step-title { font-size: 16px; font-weight: 600; color: var(--text1); margin-bottom: 5px; }
+.agro-step-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+.agro-wifi-card {
+  margin-top: 14px; background: var(--card-bg); border: 1px solid var(--border2);
+  border-radius: var(--r-md); padding: 6px;
+}
+.agro-wifi-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px;
+}
+.agro-wifi-row + .agro-wifi-row { border-top: 1px solid var(--border2); }
+.agro-wifi-label { font-size: 12px; color: var(--text3); width: 76px; flex-shrink: 0; }
+.agro-wifi-value {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 14px; color: var(--text1); flex: 1;
+  background: none; padding: 0;
+}
+.agro-copy-btn {
+  flex-shrink: 0; font-family: inherit; font-size: 12px; font-weight: 500;
+  color: var(--text2); background: var(--bg2); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 5px 10px; cursor: pointer; transition: border-color .15s, color .15s;
+}
+.agro-copy-btn:hover { border-color: var(--border); color: var(--text1); }
+.agro-copy-btn.copied { color: var(--green4); border-color: var(--border); }
+[data-theme="light"] .agro-copy-btn.copied { color: var(--green2); }
+
+/* ── CTA de abrir painel ── */
+.agro-panel-cta {
+  margin: 44px var(--gutter) 0; padding: 28px 30px;
+  background: var(--green2); border-radius: var(--r-lg);
+}
+.agro-panel-cta-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.agro-panel-cta-title { font-size: 18px; font-weight: 600; color: #fff; }
+.agro-panel-cta-sub { font-size: 13px; color: rgba(255,255,255,.75); margin-top: 4px; }
+.agro-panel-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.agro-open-btn {
+  background: #fff; color: var(--green2); text-decoration: none;
+  display: inline-flex; align-items: center; padding: 12px 22px;
+  border-radius: var(--r-sm); font-size: 14px; font-weight: 600;
+}
+.agro-open-btn:hover { background: #e8f5e8; }
+.agro-panel-cta .btn-secondary {
+  border-color: rgba(255,255,255,.4); color: #fff;
+}
+.agro-panel-cta .btn-secondary:hover { border-color: #fff; }
+.agro-panel-cta .btn-secondary:disabled {
+  opacity: .5; cursor: not-allowed;
+}
+.agro-panel-cta .btn-secondary:disabled:hover { border-color: rgba(255,255,255,.4); }
+.agro-https-note {
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.18);
+  font-size: 12.5px; line-height: 1.6; color: rgba(255,255,255,.8);
+}
+
+/* ── FAQ ── */
+.agro-faq { padding: 44px var(--gutter) 64px; max-width: 760px; }
+.agro-faq-item {
+  border: 1px solid var(--border2); border-radius: var(--r-md);
+  padding: 4px 16px; margin-bottom: 10px; background: var(--card-bg);
+}
+.agro-faq-item summary {
+  cursor: pointer; padding: 14px 0; font-size: 14px; font-weight: 500; color: var(--text1);
+  list-style: none;
+}
+.agro-faq-item summary::-webkit-details-marker { display: none; }
+.agro-faq-item p { font-size: 13.5px; color: var(--text2); line-height: 1.7; padding-bottom: 16px; }
+
+/* ── responsivo ── */
+@media (max-width: 768px) {
+  .agro-hero, .agro-tutorial, .agro-faq { padding-left: var(--gutter); padding-right: var(--gutter); }
+  .agro-panel-cta { margin: 36px var(--gutter) 0; padding: 24px; }
+  .agro-panel-cta-row { flex-direction: column; align-items: flex-start; }
+  .agro-panel-cta-actions { width: 100%; }
+  .agro-panel-cta-actions a, .agro-panel-cta-actions button { flex: 1; text-align: center; justify-content: center; }
+  .agro-wifi-row { flex-wrap: wrap; }
+  .agro-wifi-label { width: 100%; }
+}

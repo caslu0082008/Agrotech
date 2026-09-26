@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>(function(){try{if(localStorage.getItem("agrotech-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materiais — AgroTech</title>
+<meta name="description" content="Documentação técnica, vídeos, apresentações e pesquisas do projeto AgroTech.">
+<meta name="theme-color" content="#145c26">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23145c26'/%3E%3Cg fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' transform='translate(4 4) scale(1)'%3E%3Cpath d='M7 20h10'/%3E%3Cpath d='M10 20c5.5-2.5.8-6.4 3-10'/%3E%3Cpath d='M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z'/%3E%3Cpath d='M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/efeitos.css">
+<link rel="stylesheet" href="css/produtos.css">
+<link rel="stylesheet" href="css/editorial.css">
+</head>
+<body>
+
+<!-- ══════ NAV ══════ -->
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="logo-mark"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></span>
+    AgroTech
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" id="nl-home">Home</a></li>
+    <li><a href="equipe.html" id="nl-team">Equipe</a></li>
+    <li><a href="produtos.html" id="nl-mat" class="active">Materiais</a></li>
+    <li><a href="referencias.html" id="nl-refs">Referências</a></li>
+    <li><a href="jogo.html" id="nl-game">O Jogo</a></li>
+    <li><a href="contato.html" id="nl-contato">Contato</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema" aria-label="Alternar tema"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button>
+    <a class="nav-cta nav-agrotruck" id="navAgrotruckBtn" href="agrotruck.html" hidden>Meu Agrotruck</a>
+    <button class="nav-cta" id="navAuthBtn" onclick="AgroAuth.onNavAuthClick()">Entrar</button>
+    <div class="nav-user" id="navUser" hidden>
+      <a href="admin.html" data-admin-link hidden>Administrar</a>
+      <span class="nav-user-name" id="navUserName"></span>
+      <button class="nav-user-logout" id="navLogoutBtn" onclick="AgroAuth.logout()">Sair</button>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="equipe.html">Equipe</a>
+  <a href="produtos.html" class="active" aria-current="page">Materiais</a>
+  <a href="referencias.html">Referências</a>
+  <a href="jogo.html">O Jogo</a>
+  <a href="contato.html">Contato</a>
+  <div class="mobile-menu-footer">
+    <a class="nav-cta nav-agrotruck" id="navAgrotruckBtnMobile" href="agrotruck.html" style="flex:1;text-align:center;" hidden>Meu Agrotruck</a>
+    <button class="nav-cta" style="flex:1;" id="navAuthBtnMobile" onclick="closeMenu();AgroAuth.onNavAuthClick()">Entrar</button>
+    <div class="nav-user nav-user-mobile" id="navUserMobile" style="flex:1;" hidden>
+      <a href="admin.html" data-admin-link hidden>Administrar</a>
+      <span class="nav-user-name" id="navUserNameMobile"></span>
+      <button class="nav-user-logout" id="navLogoutBtnMobile" onclick="closeMenu();AgroAuth.logout()">Sair</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ AUTH MODAL (login / cadastro / recuperação de senha) ══════ -->
+<div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <button class="login-close" onclick="closeLogin()" aria-label="Fechar"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+
+    <!-- ── VIEW: LOGIN ── -->
+    <div class="auth-view" id="view-login" data-view="login">
+      <div class="login-badge"><span class="badge-dot"></span>Acesso à plataforma</div>
+      <div class="login-title" id="loginTitle">Entrar</div>
+      <p class="login-sub">Acesse o painel AgroTech para acompanhar seus sensores e relatórios.</p>
+
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label for="loginEmail">E-mail</label>
+          <input type="email" id="loginEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Senha</label>
+          <input type="password" id="loginPassword" name="password" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <div class="login-row">
+          <label class="login-check">
+            <input type="checkbox" name="remember" id="loginRemember"> Lembrar de mim
+          </label>
+          <a href="#" class="login-forgot" onclick="return AgroAuth.showView('forgot');">Esqueceu a senha?</a>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Entrar</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="loginError"></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Ainda não tem conta? <a href="#" onclick="return AgroAuth.showView('register');">Criar conta</a></p>
+    </div>
+
+    <!-- ── VIEW: CADASTRO ── -->
+    <div class="auth-view" id="view-register" data-view="register" hidden>
+      <div class="login-badge"><span class="badge-dot"></span>Nova conta</div>
+      <div class="login-title">Criar conta</div>
+      <p class="login-sub">Cadastre-se para acessar o painel AgroTech.</p>
+
+      <form id="registerForm" novalidate>
+        <div class="field">
+          <label for="registerNome">Nome</label>
+          <input type="text" id="registerNome" name="nome" placeholder="Seu nome completo" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="registerEmail">E-mail</label>
+          <input type="email" id="registerEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="registerPassword">Senha</label>
+          <input type="password" id="registerPassword" name="password" placeholder="Mínimo 8 caracteres, com letras e números" autocomplete="new-password" required>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Criar conta</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="registerError"></div>
+        <div class="form-success" id="registerSuccess"><span class="ico">✓</span><span class="form-success-text">Conta criada com sucesso!</span></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Já tem conta? <a href="#" onclick="return AgroAuth.showView('login');">Entrar</a></p>
+    </div>
+
+    <!-- ── VIEW: ESQUECI MINHA SENHA ── -->
+    <div class="auth-view" id="view-forgot" data-view="forgot" hidden>
+      <div class="login-badge"><span class="badge-dot"></span>Recuperação de senha</div>
+      <div class="login-title">Esqueceu a senha?</div>
+      <p class="login-sub">Informe seu e-mail. Se houver uma conta cadastrada, enviaremos um link para redefinir sua senha.</p>
+
+      <form id="forgotForm" novalidate>
+        <div class="field">
+          <label for="forgotEmail">E-mail</label>
+          <input type="email" id="forgotEmail" name="email" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <button type="submit" class="submit-btn">
+          <span class="btn-label">Enviar link de recuperação</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+        <div class="login-error" id="forgotError"></div>
+        <div class="form-success" id="forgotSuccess"><span class="ico">✓</span><span class="form-success-text">Se este e-mail estiver cadastrado, você receberá um link em instantes.</span></div>
+      </form>
+
+      <div class="login-divider"><span>ou</span></div>
+      <p class="login-signup">Lembrou a senha? <a href="#" onclick="return AgroAuth.showView('login');">Entrar</a></p>
+    </div>
+
+  </div>
+</div>
+<div class="page active" id="page-mat">
+
+  <section class="hero">
+    <video class="hero-video hero-video-dark" autoplay muted loop playsinline poster="img/imagem_home.png">
+      <source src="img/hero-video.mp4" type="video/mp4">
+    </video>
+    <video class="hero-video hero-video-light" muted loop playsinline poster="img/hero-video-light-poster.jpg">
+      <source src="img/hero-video-light.mp4" type="video/mp4">
+    </video>
+    <div class="hero-grid"></div><div class="hero-glow"></div>
+    <div class="hero-right-panel"><div class="panel-veil"></div></div>
+    <div class="hero-content">
+      <div class="hero-badge"><span class="badge-dot"></span>Recursos do projeto</div>
+      <h1>Nossos<br><span class="hl">Materiais</span></h1>
+      <p class="hero-sub">Documentação, vídeos, apresentações e pesquisas que compõem o acervo do AgroTech.</p>
+    </div>
+  </section>
+
+  <div class="scanner-strip">
+    <span class="strip-label">Acervo</span>
+    <div class="strip-div"></div><span class="strip-item">Documentação técnica</span>
+    <div class="strip-div"></div><span class="strip-item">Vídeos tutoriais</span>
+    <div class="strip-div"></div><span class="strip-item">Apresentações</span>
+    <div class="strip-div"></div><span class="strip-item">Pesquisas & dados</span>
+  </div>
+
+  <div class="mat-main">
+    
+    <h2 class="sec-title">Materiais do projeto.</h2>
+
+    <div class="materials-editorial">
+      <a class="material-editorial tone-forest" href="#">
+        <h3>Documentação técnica</h3>
+        <p>Guias de instalação, configuração dos sensores e API reference completa.</p>
+        <span class="material-action">Acessar documentação<span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="material-editorial tone-blue" href="#">
+        <h3>Vídeos tutoriais</h3>
+        <p>Série de vídeos sobre configuração, dashboard e manutenção em campo.</p>
+        <span class="material-action">Ver playlist<span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="material-editorial tone-ochre" href="#">
+        <h3>Apresentações</h3>
+        <p>Slides para investidores, parceiros e eventos do agronegócio.</p>
+        <span class="material-action">Baixar slides<span aria-hidden="true">↗</span></span>
+      </a>
+      <a class="material-editorial tone-teal" href="#">
+        <h3>Pesquisas & dados</h3>
+        <p>Relatórios de campo, dados por safra e artigos científicos da equipe.</p>
+        <span class="material-action">Ver relatórios<span aria-hidden="true">↗</span></span>
+      </a>
+    </div>
+
+    <div class="page-end" style="margin-top:52px;">
+      <div><div class="pe-h">Precisa de mais materiais?</div><div class="pe-sub">Entre em contato com a equipe.</div></div>
+      <div class="pe-note">Novos materiais são adicionados conforme o projeto avança.</div>
+    </div>
+  </div>
+
+  <footer><span class="footer-logo">AgroTech</span><span class="footer-text">Materiais · Acervo do projeto</span></footer>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+<script src="js/chuva.js"></script>
+<script src="js/efeitos.js"></script>
+<script src="js/produtos.js"></script>
+</body>
+</html>

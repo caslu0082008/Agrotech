@@ -1,0 +1,122 @@
+/* ═══════════════════════════════════════════
+   AGROTECH — EFEITOS DOS CARDS
+   Carregado DEPOIS do style.css, então sobrescreve
+   o hover simples que existia antes.
+   Interações discretas: sem holofote, sem glow,
+   sem rotação de ícone. Só elevação e contraste sutis.
+═══════════════════════════════════════════ */
+
+:root {
+  --fx-ease: cubic-bezier(.22,.61,.36,1);
+  --fx-lift: -3px;
+}
+
+/* ── BASE COMUM DE TODOS OS CARDS ────────────── */
+.feat-card,
+.mat-card,
+.member-card,
+.ref-card,
+.spec-card {
+  transition:
+    transform .25s var(--fx-ease),
+    border-color .2s ease,
+    box-shadow .25s var(--fx-ease);
+}
+
+/* ── ELEVAÇÃO NO HOVER (sutil, consistente com .card) ── */
+.feat-card:hover,
+.mat-card:hover,
+.spec-card:hover {
+  transform: translateY(var(--fx-lift));
+  border-color: var(--border);
+  box-shadow: 0 8px 20px var(--shadow);
+}
+.member-card:hover {
+  transform: translateY(var(--fx-lift));
+  border-color: var(--border);
+  box-shadow: 0 10px 24px var(--shadow);
+}
+.ref-card:hover {
+  border-color: var(--border);
+  box-shadow: 0 8px 18px var(--shadow);
+}
+
+[data-theme="light"] .feat-card:hover,
+[data-theme="light"] .mat-card:hover,
+[data-theme="light"] .spec-card:hover,
+[data-theme="light"] .member-card:hover,
+[data-theme="light"] .ref-card:hover {
+  border-color: #b8d8b8;
+}
+
+/* ── ÍCONES: leve realce de cor, sem girar ───── */
+.feat-icon, .mat-icon {
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.feat-card:hover .feat-icon {
+  background: rgba(45,184,78,.16);
+  border-color: rgba(45,184,78,.4);
+}
+[data-theme="light"] .feat-card:hover .feat-icon {
+  background: #e8f5e8;
+  border-color: #9ccf9c;
+}
+
+/* ── TEXTO ────────────────────────────────────── */
+.feat-name, .mat-name {
+  transition: color .2s ease;
+}
+.feat-card:hover .feat-name,
+.mat-card:hover .mat-name { color: var(--green5); }
+[data-theme="light"] .feat-card:hover .feat-name,
+[data-theme="light"] .mat-card:hover .mat-name { color: var(--green2); }
+
+/* seta do link "Acessar documentação →" ganha leve impulso */
+.mat-link .ico { transition: transform .2s var(--fx-ease); }
+.mat-card:hover .mat-link .ico { transform: translateX(4px); }
+.mat-link { transition: color .2s ease; }
+
+/* ── APARECER AO ROLAR A PÁGINA ──────────────── */
+.fx-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s var(--fx-ease), transform .5s var(--fx-ease);
+}
+.fx-reveal.fx-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPEITA QUEM DESATIVOU ANIMAÇÕES ───────── */
+@media (prefers-reduced-motion: reduce) {
+  .feat-card, .mat-card, .member-card, .ref-card, .spec-card,
+  .feat-icon, .mat-icon, .fx-reveal {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ── NO CELULAR: sem elevação (não existe hover) ── */
+@media (hover: none) {
+  .feat-card:hover, .mat-card:hover,
+  .member-card:hover, .spec-card:hover,
+  .ref-card:hover { transform: none; }
+}
+
+/* ── EQUIPE: foto com zoom bem discreto ──────── */
+.member-photo { overflow: hidden; }
+.member-photo img,
+.photo-avatar {
+  transition: transform .35s var(--fx-ease);
+}
+.member-card:hover .member-photo img { transform: scale(1.03); }
+.member-card:hover .photo-avatar     { transform: scale(1.03); }
+
+.member-name { transition: color .2s ease; }
+.member-card:hover .member-name { color: var(--green5); }
+[data-theme="light"] .member-card:hover .member-name { color: var(--green2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .member-photo img, .photo-avatar { transition: none !important; transform: none !important; }
+}
