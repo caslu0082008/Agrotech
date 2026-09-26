@@ -1,0 +1,140 @@
+/* Névoa nas transições e rodapé compartilhado. */
+:root { --mist-solid:#071009; --mist-soft:rgba(7,16,9,.8); --mist-clear:rgba(7,16,9,0); }
+[data-theme="light"] { --mist-solid:#f5f7f5; --mist-soft:rgba(245,247,245,.8); --mist-clear:rgba(245,247,245,0); }
+.hero, .game-hero, .agro-hero { position:relative; border-bottom:0; padding-bottom:75px; }
+
+.scanner-strip {
+  background:var(--mist-solid); color:var(--text2); border:0;
+  flex-wrap:wrap; white-space:normal; height:auto; min-height:44px;
+}
+.scanner-strip .strip-label, .scanner-strip .strip-item { color:var(--text2); }
+.scanner-strip .strip-div { background:var(--border2); }
+#page-home .home-main, #page-mat .mat-main, .team-main, .ref-main {
+  position:relative;
+}
+
+/* Laço visual suave entre o conteúdo e o rodapé, também nas páginas sem hero. */
+footer.site-footer {
+  position:relative; display:block; border:0; margin:0;
+  padding:55px var(--gutter) 26px;
+  background:transparent;
+}
+footer.site-footer::before { display:none; }
+.footer-banner {
+  position:relative; isolation:isolate; overflow:hidden;
+  display:flex; align-items:center; gap:28px; min-height:150px;
+  padding:28px 36px; border:1px solid #61885266; border-radius:12px;
+  background:linear-gradient(100deg,rgba(8,46,25,.97),rgba(15,67,32,.9)),var(--paisagem);
+  background-size:cover; background-position:center 70%; color:#f4faef;
+  box-shadow:0 12px 35px #071f1314;
+}
+.footer-banner::after {
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:url("../img/curvas-terreno.svg") center bottom / cover no-repeat; opacity:.15;
+}
+.footer-leaf {
+  display:grid; place-items:center; flex-shrink:0; width:84px; height:88px;
+  border-radius:18px; background:linear-gradient(135deg,#285c32,#0a301a);
+}
+.footer-leaf svg { width:58px; height:58px; }
+.footer-message { flex:1; min-width:0; }
+.footer-message::before { content:""; display:block; width:44px; height:3px; background:#a0c75e; margin-bottom:14px; }
+.footer-message h2 {
+  font-family:'Bebas Neue','Oswald','Arial Narrow',sans-serif;
+  font-size:clamp(26px,2.7vw,38px); font-weight:400; line-height:1.15; margin:0 0 6px; color:#f4faef;
+}
+.footer-message a { color:#e3eddc; font-size:16px; line-height:1.6; text-decoration:none; }
+.footer-message a:hover { text-decoration:underline; }
+.footer-note {
+  flex:0 1 320px; display:flex; align-items:center; gap:20px;
+  padding:14px 0 14px 26px; border-left:1px solid #b4c9a96b;
+}
+.footer-note svg { width:32px; height:36px; flex-shrink:0; color:#a6c594; }
+.footer-note p { color:#e0ead8; font-size:14px; line-height:1.6; margin:0; }
+footer.site-footer a:focus-visible { outline:2px solid #c0e1a0; outline-offset:5px; }
+@media(max-width:700px) {
+  .hero, .game-hero, .agro-hero { padding-bottom:55px; }
+  
+  footer.site-footer { padding-top:35px; }
+  .footer-banner { flex-wrap:wrap; gap:20px; padding:24px; }
+  .footer-leaf { width:60px; height:66px; border-radius:14px; }
+  .footer-leaf svg { width:44px; height:44px; }
+  .footer-message { flex-basis:calc(100% - 80px); }
+  .footer-note { flex-basis:100%; border-left:0; border-top:1px solid #b4c9a950; padding:18px 0 0; }
+}
+/* Uma única paisagem evita reiniciar a imagem na emenda do rodapé. */
+body { background-image:var(--paisagem-veu),var(--paisagem); background-size:cover; background-position:center bottom; background-repeat:no-repeat; }
+#page-home .home-main, #page-mat .mat-main, .team-main, .ref-main, .game-main, .agro-main, .admin-main, .reset-wrap { background-image:none; }
+
+
+
+/* Ondas e nevoa acompanham a mesma curva em todos os heros. */
+.nav-agrotruck:not([hidden]) { display:inline-flex; align-items:center; justify-content:center; gap:8px; }
+.nav-truck-icon { width:22px; height:22px; flex-shrink:0; }
+
+
+
+
+.agro-hero { overflow:hidden; isolation:isolate; min-height:400px; padding-top:65px; padding-bottom:180px; }
+.agro-hero::before { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,rgba(7,16,9,.94),rgba(7,16,9,.45)); pointer-events:none; }
+[data-theme="light"] .agro-hero::before { background:linear-gradient(90deg,rgba(245,247,245,.95),rgba(245,247,245,.45)); }
+.agro-hero-inner { position:relative; z-index:4; }
+@media(max-width:700px) {
+  
+  .agro-hero { padding-top:40px; padding-bottom:125px; }
+}
+/* Reserva a transicao abaixo do conteudo, inclusive no celular. */
+body .hero, body .game-hero, body .agro-hero { padding-bottom:200px; height:auto; }
+
+:root { --mist-soft:rgba(111,139,119,.46); }
+[data-theme="light"] { --mist-soft:rgba(245,247,245,.8); }
+
+@media(max-width:700px) { body .hero, body .game-hero, body .agro-hero { padding-bottom:150px; }  }
+
+/* Chuva ambiente automatica, sem bloquear os controles. */
+#chuva-fx { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:10; }
+#chuva-fx i { position:absolute; top:-30px; width:1px; background:#a0bdae; animation:screen-rain linear infinite; }
+[data-theme="light"] #chuva-fx i { background:#59836c; }
+@keyframes screen-rain { from { transform:translateY(-30px); } to { transform:translateY(calc(100vh + 60px)); } }
+#chuva-fx.rain-paused i { animation-play-state:paused; }
+@media(prefers-reduced-motion:reduce) { #chuva-fx { display:none; } }
+
+/* Transicao compartilhada dos banners: mesma cor dos dois lados da emenda. */
+:root { --transition-rgb:7,16,9; --wave-ink:#b4d0ad; }
+[data-theme="light"] { --transition-rgb:245,247,245; --wave-ink:#77a78a; }
+.home-transition {
+  position:absolute; inset:auto 0 -1px; height:220px; z-index:3;
+  overflow:hidden; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 22% 84%,rgba(var(--transition-rgb),.86),rgba(var(--transition-rgb),0) 65%),
+    radial-gradient(ellipse at 82% 92%,rgba(var(--transition-rgb),.9),rgba(var(--transition-rgb),0) 66%),
+    linear-gradient(to bottom,rgba(var(--transition-rgb),0),rgba(var(--transition-rgb),.18) 22%,rgba(var(--transition-rgb),.82) 66%,rgb(var(--transition-rgb)) 96%);
+}
+.home-transition-waves {
+  position:absolute; width:110%; max-width:none; height:100%; left:-5%; bottom:0;
+  color:var(--wave-ink); pointer-events:none;
+  animation:home-topography 18s ease-in-out infinite alternate;
+}
+#page-home .home-main, #page-mat .mat-main, .team-main, .ref-main, .game-specs {
+  background-image:linear-gradient(to bottom,rgb(var(--transition-rgb)),rgba(var(--transition-rgb),.88) 100px,rgba(var(--transition-rgb),0) 360px);
+}
+@keyframes home-topography {
+  from { transform:translate3d(-.4%,3px,0); }
+  to { transform:translate3d(.4%,-3px,0); }
+}
+@media(max-width:700px) {
+  .home-transition { height:145px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .home-transition-waves { animation:none; }
+}
+
+/* Identidade AgroTech: folhas e circuito, compartilhada por todas as paginas. */
+.nav-logo .logo-mark { width:40px; height:40px; padding:0; background:transparent; border-radius:10px; flex-shrink:0; }
+.nav-logo .logo-mark img { width:100%; height:100%; }
+.nav-logo .brand-wordmark { font-weight:700; letter-spacing:-.7px; color:#dcf1e5; }
+.nav-logo .brand-wordmark > span { color:#63cc96; }
+[data-theme="light"] .nav-logo .brand-wordmark { color:#0f5733; }
+[data-theme="light"] .nav-logo .brand-wordmark > span { color:#32865b; }
+.footer-leaf { background:transparent; }
+.footer-leaf img { width:100%; height:auto; }
