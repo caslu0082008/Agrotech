@@ -1,0 +1,26 @@
+﻿/* Shared interaction layer; no layout or content changes. */
+.tilt-card { position:relative; }
+.tilt-shine { position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:3; opacity:0; background:radial-gradient(circle at var(--tilt-light-x,50%) var(--tilt-light-y,50%),#9fd9aa16,transparent 65%); transition:opacity .3s; }
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .tilt-card.tilt-moving { will-change:transform; transition:box-shadow .25s,border-color .25s,opacity .5s; }
+  .tilt-card.tilt-active { border-color:#5d9972; box-shadow:var(--tilt-shadow-x,0px) 14px 28px #001c2026; }
+  .tilt-active > .tilt-shine { opacity:1; }
+  .tilt-card :is(.card-emblem,.mech-icon,.spec-icon,.member-avatar,.ref-arrow,h3,.ref-title,.mech-title,.spec-val,.material-action,.card-landscape) { transition:transform .35s ease,background-color .25s,color .25s; }
+  .tilt-active :is(.card-emblem,.mech-icon,.spec-icon,.member-avatar) { transform:perspective(800px) translateZ(14px) translateY(-3px); }
+  .tilt-active :is(h3,.ref-title,.mech-title,.spec-val) { transform:perspective(800px) translateZ(8px) translateY(-1px); }
+  .tilt-active .material-action { transform:perspective(800px) translateZ(12px); }
+  .tilt-card h3::before { transform-origin:left; transition:transform .35s; }
+  .tilt-active h3::before { transform:scaleX(1.16); }
+  .tilt-active .card-landscape { transform:translateX(3px) translateY(-2px) scaleX(1.02); }
+  .tilt-active :is(.material-action > span,.ref-arrow) { background:#0f5733; color:#fff; }
+  .tilt-active .ref-arrow svg { transform:translateX(3px); }
+  .tilt-active .material-action > span { transform:translateX(3px); }
+}
+@media(hover:none), (pointer:coarse) {
+  .tilt-card:active { border-color:#5d9972; box-shadow:0 3px 12px #001c201a; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .tilt-card, .tilt-card * { animation:none !important; transition:none !important; }
+  .tilt-card:hover { transform:none !important; }
+  .tilt-shine { display:none; }
+}
