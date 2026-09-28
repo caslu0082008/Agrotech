@@ -13,8 +13,8 @@
   .includes(window.location.hostname);
 
 const base = local
-  ? 'http://localhost:3000'
-  : 'https://agrotech-backend-o07u.onrender.com';
+  ? window.location.protocol + '//' + window.location.hostname + ':3000'
+  : window.location.origin;
 
 const API_ROOT = (window.AGROTECH_API_BASE_URL || base)
   .replace(/\/$/, '');
@@ -86,7 +86,9 @@ const API_ROOT = (window.AGROTECH_API_BASE_URL || base)
         body: body ? JSON.stringify(body) : undefined,
       });
     } catch (networkErr) {
-      const err = new Error(NETWORK_ERROR_MSG);
+      const err = new Error(networkErr.name === 'AbortError'
+        ? 'O servidor demorou demais para responder. Tente novamente em instantes. Se persistir, o servi?o pode estar indispon?vel.'
+        : NETWORK_ERROR_MSG);
       err.isNetworkError = true;
       throw err;
     } finally { clearTimeout(timeout); }
