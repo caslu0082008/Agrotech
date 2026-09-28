@@ -77,7 +77,7 @@ const API_ROOT = (window.AGROTECH_API_BASE_URL || base)
   async function apiRequest(path, { method = 'GET', body, admin = false } = {}) {
     let response;
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
+    const timeout = setTimeout(() => controller.abort(), 90000);
     try {
       response = await fetch((admin ? API_ROOT + '/api/admin' : API_BASE_URL) + path, {
         method,
