@@ -115,7 +115,7 @@ body .hero, body .game-hero, body .agro-hero { padding-bottom:200px; height:auto
   color:var(--wave-ink); pointer-events:none;
   animation:home-topography 18s ease-in-out infinite alternate;
 }
-#page-home .home-main, #page-mat .mat-main, .team-main, .ref-main, .game-specs {
+#page-home .home-main, #page-mat .mat-main, .team-main, .ref-main {
   background-image:linear-gradient(to bottom,rgb(var(--transition-rgb)),rgba(var(--transition-rgb),.88) 100px,rgba(var(--transition-rgb),0) 360px);
 }
 @keyframes home-topography {

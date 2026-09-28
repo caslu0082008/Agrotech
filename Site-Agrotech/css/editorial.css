@@ -1,6 +1,6 @@
 /* Cards agrícolas: Home e Materiais. */
-#page-home, #page-mat { --editorial-surface:#13241c; --editorial-line:#304637; --editorial-copy:#c3cec7; --section-ink:#e4efe7; --land-opacity:.13; }
-[data-theme="light"] #page-home, [data-theme="light"] #page-mat { --editorial-surface:#ffffffed; --editorial-line:#d8e3dc; --editorial-copy:#626a72; --section-ink:#083b25; --land-opacity:.08; }
+#page-home, #page-mat, .ref-main, .game-main { --editorial-surface:#13241c; --editorial-line:#304637; --editorial-copy:#c3cec7; --section-ink:#e4efe7; --land-opacity:.13; }
+[data-theme="light"] #page-home, [data-theme="light"] #page-mat, [data-theme="light"] .ref-main, [data-theme="light"] .game-main { --editorial-surface:#ffffffed; --editorial-line:#d8e3dc; --editorial-copy:#626a72; --section-ink:#083b25; --land-opacity:.08; }
 .tone-forest { --card-ink:#99d19d; --emblem-bg:#233f2b; }
 .tone-blue { --card-ink:#9fcce8; --emblem-bg:#203b4c; }
 .tone-ochre { --card-ink:#e7bc88; --emblem-bg:#493527; }
@@ -78,4 +78,42 @@
   .material-editorial h3 { padding-top:0; }
   .material-editorial h3::before { display:none; }
   .material-action { flex-wrap:wrap; }
+}
+
+/* Referencias e Jogo compartilham a superficie e tipografia da Home. */
+.ref-main .ref-card, .game-main .spec-card, .game-main .mech-item {
+  position:relative; isolation:isolate; overflow:hidden; min-width:0;
+  background:var(--editorial-surface); border:1px solid var(--editorial-line);
+  border-radius:15px; padding:28px 24px 66px; box-shadow:0 8px 26px #0015080a;
+}
+.ref-card::after, .spec-card::after, .mech-item::after {
+  content:""; position:absolute; inset:auto 0 0; height:65px; z-index:-1;
+  background:currentColor; color:var(--card-ink); opacity:var(--land-opacity);
+  mask:url("../img/onda-transicao.svg") center bottom / 100% 100% no-repeat;
+  pointer-events:none;
+}
+.ref-main .ref-title, .game-main .spec-val, .game-main .mech-title {
+  font-family:"Bebas Neue","Oswald","Arial Narrow",sans-serif;
+  font-size:clamp(25px,2.15vw,34px); font-weight:400; line-height:1.13;
+  color:var(--card-ink); margin:10px 0 16px; overflow-wrap:anywhere;
+}
+.ref-main .ref-desc, .game-main .mech-desc, .game-main .spec-label {
+  color:var(--editorial-copy); font-size:15px; line-height:1.7;
+}
+.ref-main .ref-arrow, .game-main .spec-icon, .game-main .mech-icon {
+  display:grid; place-items:center; flex-shrink:0;
+  width:62px; height:68px; border-radius:13px; margin:0 0 12px;
+  color:var(--card-ink); background:var(--emblem-bg);
+}
+.ref-main .ref-arrow { width:42px; height:42px; border-radius:50%; }
+.game-main .spec-icon .ico, .game-main .mech-icon .ico { width:30px; height:30px; }
+.game-main .spec-card { text-align:left; }
+.ref-main .ref-card:hover, .ref-main .ref-card:focus-visible,
+.game-main .spec-card:hover, .game-main .mech-item:hover { border-color:var(--card-ink); }
+.ref-main .ref-card:focus-visible { outline:2px solid var(--card-ink); outline-offset:4px; }
+.game-main .game-specs { background:transparent; }
+.ref-grid { gap:22px; }
+@media(max-width:700px) {
+  .game-main .specs-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ref-main .ref-card, .game-main .spec-card, .game-main .mech-item { padding:22px 18px 55px; }
 }
