@@ -9,9 +9,16 @@
 
   // Ajuste esta constante se o backend rodar em outro host/porta.
   // Como usamos cookies httpOnly de sessão, "credentials: include" é obrigatório.
-  const local = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
-  const base = local && ['5500','5501'].includes(window.location.port) ? window.location.protocol + '//' + window.location.hostname + ':3000' : window.location.origin;
-  const API_ROOT = (window.AGROTECH_API_BASE_URL || base).replace(/\/$/, '');
+  const local = ['localhost', '127.0.0.1', '[::1]']
+  .includes(window.location.hostname);
+
+const base = local
+  ? 'http://localhost:3000'
+  : 'https://agrotech-backend-o07u.onrender.com';
+
+const API_ROOT = (window.AGROTECH_API_BASE_URL || base)
+  .replace(/\/$/, '');
+
   const API_BASE_URL = API_ROOT + '/api/auth';
   let sessionRequest = null;
   function returnTarget() {
